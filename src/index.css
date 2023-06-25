@@ -1,13 +1,492 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* normalizing */
+
+*, *::before, *::after {
+    box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+html, body {
+    margin: 0;
+    height: 100%;
 }
+
+/* ----------- global styling ---------- */
+
+body {
+    background: #ddd;
+    font-family: "System", sans-serif;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+#root, .layout, .content {
+    height: 100%;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    height: calc(100% - 100px);
+    padding: 40px;
+}
+
+.content-wrapper {
+    transform: translateX(-200px);
+    transition: .4s ease;
+    width: 100%;
+}
+
+.content-wrapper.loaded {
+    transform: translateX(0);
+}
+
+/* ----------- heading ------------ */
+
+.header {
+    padding: 20px;
+    background: #eee;
+    border-bottom: 1px solid rgba(0, 0, 0, .3);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.header__left a {
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 24px;
+    display: block;
+    transition: .2s ease;
+}
+
+.header__left a:hover {
+    transform: translateX(20px);
+}
+
+.header__right {
+    display: flex;
+    gap: 90px;
+}
+
+.header__right--buttons {
+    margin-right: 10px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.header__right--buttons a {
+    color: #000;
+    text-decoration: none;
+    transition: .2s ease;
+}
+
+.header__right--buttons a.active {
+    border: 1px solid rgba(0, 0, 0, .2);
+    background: #eee;
+}
+
+.header__right--buttons a:hover {
+    transform: scale(1.1);
+}
+
+.header__right--profile {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.header__right--profile span {
+    font-weight: bold;
+}
+
+.header__right button, .header__right a {
+    padding: 7px 20px;
+    border: 1px solid rgba(0, 0, 0, .4);
+    background: #ddd;
+    cursor: pointer;
+    transition: .5s ease;
+    border-radius: 4px;
+    display: block;
+    text-decoration: none;
+    color: #000;
+}
+
+.header__right button:hover, .header__right a:hover {
+    transform: scale(0.97641);
+    filter: brightness(120%);
+}
+
+/* ------------- forms -------------- */
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.form-group:not(:last-child) {
+    margin-bottom: 15px;
+}
+
+.form-group input {
+    border-radius: 4px;
+    padding: 10px;
+    border: 1px solid #9e9e9e;
+    transition: .2s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+}
+
+.form-button {
+    margin-top: 20px;
+    /* border-top: 1px solid rgba(0, 0, 0, .3); */
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-button button, .form-button a {
+    padding: 7px 20px;
+    border: 1px solid rgba(0, 0, 0, .4);
+    background: #ddd;
+    cursor: pointer;
+    transition: .5s ease;
+    border-radius: 4px;
+    display: block;
+    text-decoration: none;
+    color: #000;
+}
+
+.form-button button:hover, .form-button a:hover {
+    transform: scale(0.97641);
+    filter: brightness(120%);
+}
+
+/* ----------- screens ------------ */
+
+/* ---- login ---- */
+
+.login {
+    width: 100%;
+    justify-content: center;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.login-block {
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, .3);
+    max-width: 900px;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 0 4px -4px rgba(0, 0, 0, .3);
+    width: 100%;
+}
+
+.login-header {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.login-header b {
+    font-size: 28px;
+    line-height: 32px;
+    margin-bottom: 5px;
+}
+
+.login-header span {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.login-error {
+    padding: 15px 30px;
+    background: darkred;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    color: white;
+}
+
+/* ------- register ------- */
+
+
+/* ---- login ---- */
+
+.register {
+    width: 100%;
+    margin: 0 auto;
+    max-width: 900px;
+}
+
+.register-block {
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, .3);
+    max-width: 900px;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 0 4px -4px rgba(0, 0, 0, .3);
+    width: 100%;
+}
+
+.register-header {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.register-header b {
+    font-size: 28px;
+    line-height: 32px;
+    margin-bottom: 5px;
+}
+
+.register-header span {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.register-form-group {
+    margin-bottom: 15px;
+}
+
+.register-form-group b {
+    font-size: 24px;
+    line-height: 36px;
+    margin-bottom: 10px;
+    display: block;
+    padding-right: 10px;
+}
+
+.register-warning {
+    padding: 15px 30px;
+    background: darkorange;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    color: white;
+}
+
+/* ------- main -------- */
+
+.main {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.main__content {
+    /* border: 1px; */
+    background: white;
+    padding: 20px;
+    border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, .6);
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+/* interactions */
+
+.main__interaction {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.main__interaction button, .main__interaction a {
+    padding: 7px 20px;
+    border: 1px solid rgba(0, 0, 0, .4);
+    background: #fcfcfc;
+    cursor: pointer;
+    transition: .5s ease;
+    border-radius: 4px;
+    display: block;
+    text-decoration: none;
+    color: #000;
+}
+
+.main__interaction button:hover, .main__interaction a:hover {
+    transform: scale(0.97641);
+    filter: brightness(120%);
+}
+
+/* courses */
+
+.courses {
+    width: 100%;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.courses-alert {
+    padding: 10px 15px;
+    background: #3eaa56;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    color: white;
+}
+
+
+/* course card */
+
+.course-card {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 28%;
+    border: 1px solid rgba(0, 0, 0, .6);
+    padding: 20px;
+    background: #eee;
+    border-radius: 4px;
+}
+
+.course-card {}
+
+.courses-list {display: flex;flex-wrap: wrap;gap: 30px;}
+
+.course-card__title {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    gap: 5px;
+}
+
+.course-card__title b {
+    font-size: 20px;
+    line-height: 25px;
+}
+
+.course-card__title span {font-size: 13px;}
+
+.course-card__title b {
+    font-weight: bold;
+}
+
+.course-card__meta {
+    margin-bottom: 10px;
+}
+
+.course-card__description {
+    height: 100%;
+}
+
+.course-card__button {
+    margin: 20px -20px -20px;
+    padding: 20px;
+    background: #ddd;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+.course-card__button button {
+    padding: 7px 20px;
+    border: 1px solid rgba(0, 0, 0, .4);
+    background: #ddd;
+    cursor: pointer;
+    transition: .5s ease;
+    border-radius: 4px;
+    display: block;
+    text-decoration: none;
+    color: #000;
+}
+
+.course-card__button button:disabled {
+    opacity: .7;
+    background: #eee;
+    cursor: not-allowed;
+}
+
+.course-card__button button:disabled:hover {
+    transform: scale(1);
+    filter: brightness(100%);
+}
+
+
+.course-card__button button:hover {
+    transform: scale(0.97641);
+    filter: brightness(120%);
+}
+
+/* course filter */
+
+.courses-header__filter {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-bottom: 20px;
+    background: #e6e6e6;
+    padding: 10px 19px;
+    border-radius: 4px;
+    align-items: center;
+    border: 1px solid #000;
+}
+
+.courses-header__filter input {
+    padding: 3px 10px;
+    border-radius: 4px;
+    background: #ddd;
+    border: 1px solid #000;
+    cursor: pointer;
+}
+
+/* my-courses */
+
+.my-courses {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.my-courses-list__header {
+    display: flex;
+}
+
+.my-courses-list__header--item {
+    padding: 10px 10px;
+    background: #eee;
+}
+
+.my-courses-list__item {
+    display: flex;
+    background: #eee;
+}
+
+.my-courses-list__item--td {
+    padding: 10px;
+}
+
+.my-courses-list__item:nth-of-type(odd) {
+    background: #cbcbcb !important;
+}
+
+.my-courses-list__item--td select {
+    width: 100%;
+    padding: 5px;
+}
+
+.my-courses-alert {
+    padding: 10px 15px;
+    background: darkblue;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    color: white;
+}
+
+/* table global */
+
+.medium-block {
+    width: 20%;
+}
+
+.small-block {
+    width: 15%;
+}
+
+.big-block {
+    width: 50%;
+}
+
